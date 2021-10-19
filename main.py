@@ -17,10 +17,6 @@ WORDS = [
 ]
 
 
-def is_invalid_letter(input_):
-    return input_.isdigit() or (input_.isalpha() and len(input_) > 1)
-
-
 class Hangman:
 
     def __init__(self, word_to_guess):
@@ -31,13 +27,16 @@ class Hangman:
     def find_indexes(self, letter):
         return [i for i, char in enumerate(self.word_to_guess) if letter == char]
 
+    def is_invalid_letter(self, input_):
+        return input_.isdigit() or (input_.isalpha() and len(input_) > 1)
+
 
 def get_user_input():
     user_input = input('\nPlease type a letter: ')
     return user_input
 
 
-class GameProcess:
+class GameProcess(Hangman):
 
     def print_game_status(self):
         print('\n')
@@ -50,7 +49,7 @@ class GameProcess:
             self.game_progress[index] = letter
 
 
-class Play(Hangman, GameProcess):
+class Play(GameProcess):
 
     def play(self):
         while self.failed_attempts < len(HANGMAN):
@@ -80,7 +79,7 @@ class Play(Hangman, GameProcess):
 
 
 if __name__ == '__main__':
-    word_to_guess = random.choise(WORDS)
+    word_to_guess = random.choice(WORDS)
     hangman = Play(word_to_guess)
     hangman.play()
 
