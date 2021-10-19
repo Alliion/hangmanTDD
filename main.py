@@ -1,4 +1,5 @@
 import random
+import unittest
 
 HANGMAN = [
     '________',
@@ -39,3 +40,12 @@ class Play(Hangman, GameProcess):
     def play(self):
 
 
+if __name__ == '__main__':
+    word_to_guess = random.choise(WORDS)
+    hangman = Play(word_to_guess)
+    hangman.play()
+
+class Tests(unittest.TestCase):
+
+    def find_indexes_test(self):
+        self.assertTrue(self, 0, 0)
