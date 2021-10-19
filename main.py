@@ -17,6 +17,10 @@ WORDS = [
 ]
 
 
+def is_invalid_letter(input_):
+    return input_.isdigit() or (input_.isalpha() and len(input_) > 1)
+
+
 class Hangman:
 
     def __init__(self, word_to_guess):
@@ -26,9 +30,6 @@ class Hangman:
 
     def find_indexes(self, letter):
         return [i for i, char in enumerate(self.word_to_guess) if letter == char]
-
-    def is_invalid_letter(self, input_):
-        return input_.isdigit() or (input_.isalpha() and len(input_) > 1)
 
 
 def get_user_input():
@@ -57,7 +58,7 @@ class Play(GameProcess):
             user_input = get_user_input()
 
             # Validate the user input
-            if self.is_invalid_letter(user_input):
+            if is_invalid_letter(user_input):
                 print('¡The input is not a letter!')
                 continue
             # Check if the letter is not already guessed
